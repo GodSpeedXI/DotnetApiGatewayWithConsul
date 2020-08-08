@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  portalapigateway:
+    image: ${DOCKER_REGISTRY-}portalapigateway
+    ports:
+        - "7000:7000"
+    build:
+      context: .
+      dockerfile: PortalApiGateway/Dockerfile
+
+  productservice:
+    image: ${DOCKER_REGISTRY-}productservice
+    ports:
+        - "7010:7010"
+        - "7011:7011"
+    build:
+      context: .
+      dockerfile: ProductService/Dockerfile
+

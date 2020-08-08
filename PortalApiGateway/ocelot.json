@@ -1,0 +1,19 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7011
+        }],
+      "UpstreamHttpMethod": [ "Get", "Update", "Post" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "X-RequestId",
+    "BaseUrl": "http://localhost:7000"
+  }
+}

@@ -1,0 +1,12 @@
+###Setup Docker Desktop
+Enable kubernetes in setting
+
+###Deploying Dash Board
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+kubectl proxy
+
+###Create Simple User
+https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+or use command on powershell
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | sls admin-user | ForEach-Object { $_ -Split '\s+' } | Select -First 1)

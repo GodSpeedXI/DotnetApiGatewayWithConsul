@@ -9,6 +9,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductService", "ProductSe
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2A47B7B9-D6A8-420B-9AF5-1679AB2D875D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceApp", "AuthService\AuthServiceApp\AuthServiceApp.csproj", "{C5A3DFFC-0223-441F-9348-6928C5F09D23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthService", "AuthService", "{354E04DA-9941-45AC-8F9D-C8F52C9479E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceDomain", "AuthService\AuthServiceDomain\AuthServiceDomain.csproj", "{D70629BC-4C7D-42BB-9BC7-B2CC13DE6441}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServiceInfrastructure", "AuthService\AuthServiceInfrastructure\AuthServiceInfrastructure.csproj", "{F1B4FCC8-E0D3-41C7-B47C-0A9EFD625E08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbInitFiles", "DbInitFiles", "{14F0F243-27BF-4DB5-81EE-ACD99729245C}"
+	ProjectSection(SolutionItems) = preProject
+		AuthService\DbInitFiles\Dockerfile = AuthService\DbInitFiles\Dockerfile
+		AuthService\DbInitFiles\init.sql = AuthService\DbInitFiles\init.sql
+		AuthService\DbInitFiles\Readme.md = AuthService\DbInitFiles\Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +42,27 @@ Global
 		{2A47B7B9-D6A8-420B-9AF5-1679AB2D875D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A47B7B9-D6A8-420B-9AF5-1679AB2D875D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A47B7B9-D6A8-420B-9AF5-1679AB2D875D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A3DFFC-0223-441F-9348-6928C5F09D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A3DFFC-0223-441F-9348-6928C5F09D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A3DFFC-0223-441F-9348-6928C5F09D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A3DFFC-0223-441F-9348-6928C5F09D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D70629BC-4C7D-42BB-9BC7-B2CC13DE6441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D70629BC-4C7D-42BB-9BC7-B2CC13DE6441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D70629BC-4C7D-42BB-9BC7-B2CC13DE6441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D70629BC-4C7D-42BB-9BC7-B2CC13DE6441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1B4FCC8-E0D3-41C7-B47C-0A9EFD625E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B4FCC8-E0D3-41C7-B47C-0A9EFD625E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B4FCC8-E0D3-41C7-B47C-0A9EFD625E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B4FCC8-E0D3-41C7-B47C-0A9EFD625E08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C5A3DFFC-0223-441F-9348-6928C5F09D23} = {354E04DA-9941-45AC-8F9D-C8F52C9479E6}
+		{D70629BC-4C7D-42BB-9BC7-B2CC13DE6441} = {354E04DA-9941-45AC-8F9D-C8F52C9479E6}
+		{F1B4FCC8-E0D3-41C7-B47C-0A9EFD625E08} = {354E04DA-9941-45AC-8F9D-C8F52C9479E6}
+		{14F0F243-27BF-4DB5-81EE-ACD99729245C} = {354E04DA-9941-45AC-8F9D-C8F52C9479E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4EFCDE56-C093-4114-989E-4240DE0722FE}

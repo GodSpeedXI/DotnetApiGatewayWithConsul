@@ -2,6 +2,10 @@ version: '3.4'
 networks:
     consul_cluster:
 
+volumes:
+    auth-db-postgres:
+    
+
 services:
   portalapigateway:
     image: ${DOCKER_REGISTRY-}portalapigateway
@@ -42,3 +46,31 @@ services:
         - "8600:8600"
     restart: always
     command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client='0.0.0.0'"
+
+  authservice:
+    container_name: AuthService
+    image: ${DOCKER_REGISTRY-}authservice
+    networks:
+        consul_cluster:
+            aliases:
+                - authservice.internal
+    build:
+      context: AuthService/AuthServiceApp/
+      dockerfile: Dockerfile
+
+  postgresdb:
+    container_name: postgresdb
+    image: postgres:latest
+    volumes:
+        - auth-db-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: auth
+      POSTGRES_USER: auther
+      POSTGRES_PASSWORD: P@ssw0rd
+    restart: always
+    ports:
+        - 5432:5432
+    networks: 
+        consul_cluster:
+            aliases:
+                - postgresdb.internal

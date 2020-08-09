@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ProductService
+namespace AuthService
 {
     public class Program
     {
@@ -19,16 +19,16 @@ namespace ProductService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(config =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("hosting.json", optional: true)
+                        .AddJsonFile("appsettings.json", optional: true)
+                        .AddEnvironmentVariables()
+                        .AddCommandLine(args);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureAppConfiguration(config =>
-                    {
-                        config.SetBasePath(Directory.GetCurrentDirectory())
-                            .AddJsonFile("hosting.json", optional: true)
-                            .AddJsonFile("appsettings.json", optional: true)
-                            .AddEnvironmentVariables()
-                            .AddCommandLine(args);
-                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

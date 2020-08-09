@@ -1,8 +1,14 @@
 version: '3.4'
+networks:
+    consul_cluster:
 
 services:
   portalapigateway:
     image: ${DOCKER_REGISTRY-}portalapigateway
+    networks:
+        consul_cluster:
+            aliases:
+                - apigate1.internal
     ports:
         - "7000:7000"
     build:
@@ -11,6 +17,10 @@ services:
 
   productservice:
     image: ${DOCKER_REGISTRY-}productservice
+    networks:
+        consul_cluster:
+            aliases:
+                - productservice.internal
     ports:
         - "7010:7010"
         - "7011:7011"
@@ -18,3 +28,17 @@ services:
       context: .
       dockerfile: ProductService/Dockerfile
 
+  dev-consul:
+    container_name: "dev-consul"
+    build:
+        context: ConsulSetup/
+        dockerfile: Dockerfile
+    networks:
+        consul_cluster:
+            aliases:
+                - consul.internal
+    ports:
+        - "8500:8500"
+        - "8600:8600"
+    restart: always
+    command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client='0.0.0.0'"

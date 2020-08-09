@@ -25,7 +25,7 @@ namespace PortalApiGateway
                         config.SetBasePath(builder.HostingEnvironment.ContentRootPath)
                             .AddJsonFile("appsettings.json", true, true)
                             .AddJsonFile($"appsettings.{builder.HostingEnvironment.EnvironmentName}.json", true,true)
-                            .AddJsonFile("ocelot.json",false,false)
+                            .AddJsonFile("ocelot.json",false,true)
                             .AddEnvironmentVariables();
                     });
                     webBuilder.UseStartup<Startup>();

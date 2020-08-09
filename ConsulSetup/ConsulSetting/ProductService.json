@@ -1,0 +1,15 @@
+{
+  "services": [
+    {
+      "ID": "ProductService",
+      "Name": "ProductService",
+      "Tags": [ "ProductWebApi", "Api" ],
+      "Address": "productservice.internal",
+      "Port": 7010,
+      "Check": {
+        "HTTP": "http://productservice.internal:7010/api/health",
+        "Interval": "10s"
+      }
+    }
+  ]
+}

@@ -37,14 +37,7 @@ namespace ProductService
                     new HeaderApiVersionReader("api-version"),
                     new QueryStringApiVersionReader("v"));
             });
-            //var testUrlConf = new Uri(Configuration["urls"]);
-            //services.AddKubeClient("my-cluster", clientOptions =>
-            //{
-            //    clientOptions.ApiEndPoint = Configuration["urls"].FirstOrDefault().ToString();
-            //    clientOptions.AuthStrategy = KubeAuthStrategy.BearerToken;
-            //    clientOptions.AccessToken = "my-access-token";
-            //    clientOptions.AllowInsecure = true; // Don't validate server certificate
-            //});
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +52,7 @@ namespace ProductService
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseApiVersioning();
             app.UseEndpoints(endpoints =>

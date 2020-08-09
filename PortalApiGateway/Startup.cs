@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Ocelot.Provider.Kubernetes;
+using Ocelot.Provider.Consul;
 
 namespace PortalApiGateway
 {
@@ -27,7 +27,8 @@ namespace PortalApiGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddOcelot(Configuration);
+            services.AddOcelot(Configuration)
+                .AddConsul();
             //.AddKubernetes();
         }
 

@@ -1,19 +1,21 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/products/{everything}",
-      "DownstreamScheme": "https",
-      "UpstreamPathTemplate": "/api/products/{everything}",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7011
-        }],
-      "UpstreamHttpMethod": [ "Get", "Update", "Post" ]
+      "ServiceName": "ProductService",
+      "DownstreamPathTemplate": "/api/products/{url}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/products/{url}",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     }
   ],
   "GlobalConfiguration": {
-    "RequestIdKey": "X-RequestId",
-    "BaseUrl": "http://localhost:7000"
+    "ServiceDiscoveryProvider": {
+      "Host": "consul.internal",
+      "Port": "8500",
+      "Type": "Consul"
+    } 
   }
 }

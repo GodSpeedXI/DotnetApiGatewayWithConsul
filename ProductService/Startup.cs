@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using KubeClient;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 
 namespace ProductService
 {
@@ -37,7 +39,15 @@ namespace ProductService
                     new HeaderApiVersionReader("api-version"),
                     new QueryStringApiVersionReader("v"));
             });
-            
+
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(opt =>
+            //    {
+            //        opt.Authority = Configuration.GetSection("AppSettings:Authority").Value;
+            //        opt.RequireHttpsMetadata = false;
+            //        opt.Audience = "ProductService";
+            //    });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +56,7 @@ namespace ProductService
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                IdentityModelEventSource.ShowPII = true;
             }
             else
             {
@@ -54,6 +65,10 @@ namespace ProductService
 
             //app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //app.UseAuthentication();
+            //app.UseAuthorization();
+
             app.UseApiVersioning();
             app.UseEndpoints(endpoints =>
             {

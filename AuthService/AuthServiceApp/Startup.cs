@@ -54,6 +54,9 @@ namespace AuthService
             {
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+
+            //services.AddIdentityServer()
+            //    .AddDeveloperSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +75,7 @@ namespace AuthService
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
+            //app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
             {

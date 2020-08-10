@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="KubeClient" Version="2.3.13" />
     <PackageReference Include="KubeClient.Extensions.DependencyInjection" Version="2.3.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />

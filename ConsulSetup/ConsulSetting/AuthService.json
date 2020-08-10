@@ -1,0 +1,15 @@
+{
+  "services": [
+    {
+      "ID": "AuthService",
+      "Name": "AuthService",
+      "Tags": ["AuthServiceWebApi", "Api"],
+      "Address": "authservice.internal",
+      "Port": 7010,
+      "Check": {
+        "HTTP": "http://authservice.internal:7010/api/health",
+        "Interval": "10s"
+      }
+    }
+  ]
+}

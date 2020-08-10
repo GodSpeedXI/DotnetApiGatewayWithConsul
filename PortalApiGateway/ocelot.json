@@ -9,7 +9,18 @@
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       }
+    },
+    {
+      "ServiceName": "AuthService",
+      "DownstreamPathTemplate": "/api/auth/{url}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/auth/{url}",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     }
+    
   ],
   "GlobalConfiguration": {
     "ServiceDiscoveryProvider": {

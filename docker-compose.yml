@@ -54,6 +54,9 @@ services:
         consul_cluster:
             aliases:
                 - authservice.internal
+    ports:
+        - "7110:7010"
+        - "7111:7011"
     build:
       context: AuthService/AuthServiceApp/
       dockerfile: Dockerfile

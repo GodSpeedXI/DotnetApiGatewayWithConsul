@@ -24,6 +24,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbInitFiles", "DbInitFiles"
 		AuthService\DbInitFiles\Readme.md = AuthService\DbInitFiles\Readme.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsulSetup", "ConsulSetup", "{0E9CD501-B275-4265-A7F4-BC5B937EB09E}"
+	ProjectSection(SolutionItems) = preProject
+		ConsulSetup\Dockerfile = ConsulSetup\Dockerfile
+		ConsulSetup\guide.md = ConsulSetup\guide.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsulSetting", "ConsulSetting", "{4781B27A-2F3A-4C50-94E0-79828C0AE1A6}"
+	ProjectSection(SolutionItems) = preProject
+		ConsulSetup\ConsulSetting\AuthService.json = ConsulSetup\ConsulSetting\AuthService.json
+		ConsulSetup\ConsulSetting\ProductService.json = ConsulSetup\ConsulSetting\ProductService.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +75,7 @@ Global
 		{D70629BC-4C7D-42BB-9BC7-B2CC13DE6441} = {354E04DA-9941-45AC-8F9D-C8F52C9479E6}
 		{F1B4FCC8-E0D3-41C7-B47C-0A9EFD625E08} = {354E04DA-9941-45AC-8F9D-C8F52C9479E6}
 		{14F0F243-27BF-4DB5-81EE-ACD99729245C} = {354E04DA-9941-45AC-8F9D-C8F52C9479E6}
+		{4781B27A-2F3A-4C50-94E0-79828C0AE1A6} = {0E9CD501-B275-4265-A7F4-BC5B937EB09E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4EFCDE56-C093-4114-989E-4240DE0722FE}

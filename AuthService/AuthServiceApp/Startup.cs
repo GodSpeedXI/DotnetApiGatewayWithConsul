@@ -29,7 +29,7 @@ namespace AuthService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
-            var testSignKey = Configuration.GetSection("AppSettings:TokenKey").Value;
+            //var testSignKey = Configuration.GetSection("AppSettings:TokenKey").Value;
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {

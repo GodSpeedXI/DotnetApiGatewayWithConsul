@@ -50,6 +50,8 @@ services:
   authservice:
     container_name: AuthService
     image: ${DOCKER_REGISTRY-}authservice
+    env_file:
+        - dev.authservice.env
     networks:
         consul_cluster:
             aliases:
@@ -66,10 +68,8 @@ services:
     image: postgres:latest
     volumes:
         - auth-db-postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: auth
-      POSTGRES_USER: auther
-      POSTGRES_PASSWORD: P@ssw0rd
+    env_file:
+        - dev.postgres.env
     restart: always
     ports:
         - 5432:5432

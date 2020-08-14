@@ -29,34 +29,37 @@ namespace AuthService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
+
+            //services.AddIdentityServer()
+            //    .AddDeveloperSigningCredential();
+
             //var testSignKey = Configuration.GetSection("AppSettings:TokenKey").Value;
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(opt =>
-                {
-                    opt.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:TokenKey").Value))
-                    };
-                });
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(opt =>
+            //    {
+            //        opt.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuerSigningKey = true,
+            //            ValidateAudience = false,
+            //            ValidateIssuer = false,
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:TokenKey").Value))
+            //        };
+            //    });
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddControllers(opt =>
             {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
+                //var policy = new AuthorizationPolicyBuilder()
+                //    .RequireAuthenticatedUser()
+                //    .Build();
 
-                opt.Filters.Add(new AuthorizeFilter(policy));
+                //opt.Filters.Add(new AuthorizeFilter(policy));
             }).AddNewtonsoftJson(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
-            //services.AddIdentityServer()
-            //    .AddDeveloperSigningCredential();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

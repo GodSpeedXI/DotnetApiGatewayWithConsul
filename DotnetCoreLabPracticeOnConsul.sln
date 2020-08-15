@@ -36,6 +36,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsulSetting", "ConsulSett
 		ConsulSetup\ConsulSetting\ProductService.json = ConsulSetup\ConsulSetting\ProductService.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "envfiles", "envfiles", "{D103C063-138E-4DD8-91CF-70AF75BF34BE}"
+	ProjectSection(SolutionItems) = preProject
+		dev.authservice.env = dev.authservice.env
+		dev.postgres.env = dev.postgres.env
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

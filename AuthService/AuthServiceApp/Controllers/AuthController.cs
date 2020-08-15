@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 using AuthServiceDomain.DTO;
 using AuthServiceDomain.Entities;
 using AutoMapper;
+using IdentityServer4.Events;
+using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,14 +27,16 @@ namespace AuthServiceApp.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
+        private readonly IEventService _events;
         private readonly UserManager<UserModel> _userManager;
         private readonly SignInManager<UserModel> _signInManager;
 
-        public AuthController(IMapper mapper, IConfiguration config, 
+        public AuthController(IMapper mapper, IConfiguration config, IEventService events,
             UserManager<UserModel> userManager, SignInManager<UserModel> signInManager)
         {
             _mapper = mapper;
             _config = config;
+            _events = events;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -62,9 +70,22 @@ namespace AuthServiceApp.Controllers
             if (!userResult) return Unauthorized();
             var memberDetailObj = _mapper.Map<AuthMemberDetailDto>(user);
 
+            // Just RaiseEvent 
+            await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.FirstName));
+            // Login Prop for remembering login
+            var authProps = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1)
+            };
+            // issue authentication cookie with subject ID and username
+            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.UserName));
+            var principal = new ClaimsPrincipal(identity);
+            await HttpContext.SignInAsync(principal, authProps);
+
             return Ok(new
             {
-                token = GenerateJwtToken(memberDetailObj),
                 user = memberDetailObj
             });
         }

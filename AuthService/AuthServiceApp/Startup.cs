@@ -29,10 +29,9 @@ namespace AuthService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
-
-            //services.AddIdentityServer()
-            //    .AddDeveloperSigningCredential();
-
+            services.AddHealthChecks();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAuthentication();
             //var testSignKey = Configuration.GetSection("AppSettings:TokenKey").Value;
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //    .AddJwtBearer(opt =>
@@ -46,20 +45,22 @@ namespace AuthService
             //        };
             //    });
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddControllers(opt =>
-            {
-                //var policy = new AuthorizationPolicyBuilder()
-                //    .RequireAuthenticatedUser()
-                //    .Build();
+            //services.AddControllers(opt =>
+            //{
+            //var policy = new AuthorizationPolicyBuilder()
+            //    .RequireAuthenticatedUser()
+            //    .Build();
 
-                //opt.Filters.Add(new AuthorizeFilter(policy));
-            }).AddNewtonsoftJson(opt =>
+            //opt.Filters.Add(new AuthorizeFilter(policy));
+            //}).AddNewtonsoftJson(opt =>
+            //{
+            //    opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //});
+
+            services.AddControllers().AddNewtonsoftJson(opt =>
             {
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,18 +71,18 @@ namespace AuthService
                 app.UseDeveloperExceptionPage();
                 IdentityModelEventSource.ShowPII = true;
             }
-
             //app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseIdentityServer();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseAuthorization();
             //app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapHealthChecks("/api/health");
                 endpoints.MapControllers();
             });
         }

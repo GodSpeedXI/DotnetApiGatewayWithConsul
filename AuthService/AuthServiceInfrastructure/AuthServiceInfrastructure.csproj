@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="IdentityServer4" Version="4.0.4" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.0.4" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="4.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
@@ -23,7 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IdentityServer\Migrations\" />
+    <Folder Include="IdentityServer\Migrations\Configuration\" />
+    <Folder Include="IdentityServer\Migrations\PersistedGrant\" />
     <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
 </Project>

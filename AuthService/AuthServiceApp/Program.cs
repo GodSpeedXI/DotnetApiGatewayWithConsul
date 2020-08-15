@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
+using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.Extensions.Logging;
 
 namespace AuthService
@@ -15,6 +16,9 @@ namespace AuthService
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+
+            #region Migration Db
+
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -23,8 +27,12 @@ namespace AuthService
                     var config = services.GetRequiredService<IConfiguration>();
                     if (bool.Parse(config.GetSection("Postgres:AutoMigrateDB").Value))
                     {
-                        var context = services.GetRequiredService<AuthServiceIdentityDbContext>();
-                        context.Database.Migrate();
+                        var AuthContext = services.GetRequiredService<AuthServiceIdentityDbContext>();
+                        var persisedGrantContext = services.GetRequiredService<PersistedGrantDbContext>();
+                        var configurationContext = services.GetRequiredService<ConfigurationDbContext>();
+                        persisedGrantContext.Database.MigrateAsync().Wait();
+                        configurationContext.Database.MigrateAsync().Wait();
+                        AuthContext.Database.MigrateAsync().Wait();
                     }
                 }
                 catch (Exception ex)
@@ -33,6 +41,8 @@ namespace AuthService
                     logger.LogError(ex, "An error occured during migration");
                 }
             }
+
+            #endregion
 
             host.Run();
         }
